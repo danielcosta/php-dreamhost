@@ -6,22 +6,21 @@ Interfaces with the Dreamhost API
 Usage
 -----
 
-    $dreamhost = new dreamhost(your api key);
-    $dreamhost->exec(command, Array(arg=>value,...));
+    $api = new Dreamhost('your api key');
+    $api->exec('command'[, array(arg => value[, ...])]);
 
 Where command is one of the many listed on the Dreamhost Wiki API article.
 
-exec returns either an array of associative arrays of the data returned by Dreamhost or throws an exception upon error.
+'exec' returns either an array of associative arrays of the data returned by Dreamhost or throws an exception upon error.
 
 Example
 -------
 
-    $dreamhost = new dreamhost('your api key');
+    $api = new Dreamhost('your api key');
     $cmd = "api-list_accessible_cmds";
     try {
-        print_r($dreamhost->exec($cmd));
-        // print_r($dreamhost->$cmd()); // this would also work
-    }
-    catch (Exception $e) {
+        print_r($api->exec($cmd));
+        // print_r($api->$cmd()); // this would also work
+    } catch (Exception $e) {
         echo $e->getMessage(); // contains either the error data returned by dreamhost or a curl error string and number
     }
