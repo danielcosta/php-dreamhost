@@ -33,6 +33,8 @@ class Dreamhost {
     }
 
     /**
+     * Call to execute commands
+     * 
      * @param string $cmd
      * @param array $args
      *
@@ -44,6 +46,8 @@ class Dreamhost {
     }
 
     /**
+     * Execute commands with arguments
+     * 
      * @param string $cmd
      * @param array $args
      *
@@ -119,6 +123,8 @@ class Dreamhost {
     }
 
     /**
+     * Returns if format is valid from available formats
+     * 
      * @param string $format
      *
      * @return bool
