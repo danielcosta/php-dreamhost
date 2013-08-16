@@ -27,30 +27,30 @@ class Dreamhost {
     {
         $this->key = $key;
 
-        if (!empty($format)) {
+        if (!empty($format) && is_string($format)) {
             $this->setFormat($format);
         }
     }
 
     /**
-     * @param $cmd
-     * @param $args
+     * @param string $cmd
+     * @param array $args
      *
      * @return mixed
      */
-    public function __call($cmd, $args)
+    public function __call($cmd, array $args)
     {
         return $this->exec($cmd, $args);
     }
 
     /**
-     * @param       $cmd
+     * @param string $cmd
      * @param array $args
      *
      * @return mixed
      * @throws \Exception
      */
-    public function exec($cmd, $args = Array())
+    public function exec($cmd, array $args = array())
     {
         $args['cmd'] = $cmd;
         $args['key'] = $this->key;
@@ -85,7 +85,9 @@ class Dreamhost {
     /**
      * Set return format
      *
-     * @param $format
+     * @param string $format
+     * 
+     * @return mixed
      */
     public function setFormat($format)
     {
@@ -117,7 +119,7 @@ class Dreamhost {
     }
 
     /**
-     * @param $format
+     * @param string $format
      *
      * @return bool
      */
@@ -125,5 +127,4 @@ class Dreamhost {
     {
         return in_array($format, $this->getAvailableFormats());
     }
-
 }
