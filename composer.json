@@ -1,0 +1,18 @@
+{
+    "name": "danielcosta/php-dreamhost",
+    "description": "PHP class for the Dreamhost API",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "DanielCosta\\Dreamhost": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Costa",
+            "email": "danielcosta@gmail.com"
+        }
+    ]
+}
