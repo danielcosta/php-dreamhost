@@ -7,9 +7,9 @@ use \Exception;
 /**
  * Class Dreamhost
  *
- * @package Dreamhost
+ * @package DanielCosta\Dreamhost
  * @author  Daniel Costa <danielcosta@gmail.com>
- * @version 1.0
+ * @version 1.0.1
  */
 class Dreamhost {
 
