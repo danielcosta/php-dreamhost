@@ -1,4 +1,4 @@
-PHP class for the Dreamhost API
+PHP class for the Dreamhost API [![Build Status](https://travis-ci.org/danielcosta/php-dreamhost.png?branch=master)](https://travis-ci.org/danielcosta/php-dreamhost)
 ===============================
 
 Interfaces with the Dreamhost API
