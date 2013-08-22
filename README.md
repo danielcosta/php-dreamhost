@@ -34,8 +34,9 @@ Example
     $dh = new Dreamhost('6SHU5P2HLDAYECUM'[,format]);
 
     try {
-        $commands = $dh->exec('api-list_accessible_cmds');
-        // $commands = $dh->api-list_accessible_cmds(); // this should also work
+    	$method = 'api-list_accessible_cmds';
+        $commands = $dh->exec($method);
+        // $commands = $dh->$method(); // this should also work
         print_r($commands);
     } catch (Exception $e) {
         echo $e->getMessage(); // contains either the error data returned by dreamhost or a curl error string and number

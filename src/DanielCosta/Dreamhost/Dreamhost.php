@@ -11,8 +11,8 @@ use \Exception;
  * @author  Daniel Costa <danielcosta@gmail.com>
  * @version 1.0.1
  */
-class Dreamhost {
-
+class Dreamhost
+{
     /**
      * @var string
      */
@@ -34,9 +34,9 @@ class Dreamhost {
 
     /**
      * Call to execute commands
-     * 
+     *
      * @param string $cmd
-     * @param array $args
+     * @param array  $args
      *
      * @return mixed
      */
@@ -47,9 +47,9 @@ class Dreamhost {
 
     /**
      * Execute commands with arguments
-     * 
+     *
      * @param string $cmd
-     * @param array $args
+     * @param array  $args
      *
      * @return mixed
      * @throws \Exception
@@ -89,9 +89,10 @@ class Dreamhost {
     /**
      * Set return format
      *
-     * @param string $format
-     * 
-     * @return mixed
+     * @param $format
+     *
+     * @return $this
+     * @throws \Exception
      */
     public function setFormat($format)
     {
@@ -105,6 +106,8 @@ class Dreamhost {
     }
 
     /**
+     * Get expected API return format
+     *
      * @return string
      */
     public function getFormat()
@@ -113,6 +116,8 @@ class Dreamhost {
     }
 
     /**
+     * Set API auth key
+     *
      * @param string $key
      */
     public function setKey($key)
@@ -121,6 +126,8 @@ class Dreamhost {
     }
 
     /**
+     * Get API auth key
+     *
      * @return string
      */
     public function getKey()
@@ -148,7 +155,7 @@ class Dreamhost {
 
     /**
      * Returns if format is valid from available formats
-     * 
+     *
      * @param string $format
      *
      * @return bool
