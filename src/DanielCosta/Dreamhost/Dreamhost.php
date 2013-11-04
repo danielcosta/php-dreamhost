@@ -7,9 +7,10 @@ use \Exception;
 /**
  * Class Dreamhost
  *
- * @package Dreamhost
+ * @package DanielCosta\Dreamhost
  * @author  Daniel Costa <danielcosta@gmail.com>
  * @version 1.0
+ * @see https://github.com/danielcosta/php-dreamhost#usage
  */
 class Dreamhost {
 
@@ -23,6 +24,10 @@ class Dreamhost {
      */
     private $format = 'json';
 
+    /**
+     * @param string $key
+     * @param string $format
+     */
     public function __construct($key, $format = null)
     {
         $this->key = $key;
@@ -33,28 +38,28 @@ class Dreamhost {
     }
 
     /**
-     * Call to execute commands
+     * Method of Callback to execute commands
      * 
      * @param string $cmd
      * @param array $args
      *
      * @return mixed
      */
-    public function __call($cmd, array $args)
+    public function __call($cmd, $args = array())
     {
         return $this->exec($cmd, $args);
     }
 
     /**
      * Execute commands with arguments
-     * 
-     * @param string $cmd
-     * @param array $args
+     *
+     * @param string $cmd Command to call
+     * @param array $args Extra Arguments
      *
      * @return mixed
      * @throws \Exception
      */
-    public function exec($cmd, array $args = array())
+    public function exec($cmd, $args = array())
     {
         $args['cmd'] = $cmd;
         $args['key'] = $this->key;
@@ -87,11 +92,12 @@ class Dreamhost {
     }
 
     /**
-     * Set return format
+     * Set format of return
      *
      * @param string $format
-     * 
-     * @return mixed
+     *
+     * @return Dreamhost
+     * @throws \Exception
      */
     public function setFormat($format)
     {
@@ -105,7 +111,7 @@ class Dreamhost {
     }
 
     /**
-     * Get available return format
+     * Get available items of return format
      *
      * @return array
      */
