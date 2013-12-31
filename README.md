@@ -38,6 +38,16 @@ Publish the config using artisan CLI.
 php artisan config:publish danielcosta/dreamhost
 ~~~
 
+The config file is used to store the following options:
+
+~~~
+format => Default output format
+
+api_url => Default DreamHost API URL
+
+key => Default API key
+~~~
+
 Usage
 -----
 	
@@ -45,8 +55,8 @@ Usage
 	
 	use DanielCosta\Dreamhost;
 
-    $dh = new Dreamhost('your api key'[,format]);
-    $dh->exec('command'[, array(arg => value[, ...])]);
+    $dh = new Dreamhost();
+    $dh::cmdApi('command'[, array(arg => value[, ...])]);
 
 Where *__'command'__* is one of the many listed on the [Dreamhost Wiki API](http://wiki.dreamhost.com/API/Api_commands) article.
 
@@ -61,13 +71,15 @@ Example
 	
 	use DanielCosta\Dreamhost;
     
-    $dh = new Dreamhost('6SHU5P2HLDAYECUM'[,format]);
+    $dh = new Dreamhost();
 
     try {
     	$method = 'api-list_accessible_cmds';
-        $commands = $dh->exec($method);
-        // $commands = $dh->$method(); // this should also work
-        print_r($commands);
+        $commands = $dh::cmdApi($method);
+        $tmp = json_decode($commands, true);
+        $result = $tmp['result'];
+        $data = $tmp['data'];
+        var_dump($data);
     } catch (Exception $e) {
         echo $e->getMessage(); // contains either the error data returned by dreamhost or a curl error string and number
     }
