@@ -83,3 +83,11 @@ Example
     } catch (Exception $e) {
         echo $e->getMessage(); // contains either the error data returned by dreamhost or a curl error string and number
     }
+
+    echo $dh::getHttpCode();  // HTTP response code
+
+    echo $dh::getHttpInfo();  // HTTP header information
+
+    echo $dh::getErroNumber();  // cURL error number, if any
+
+    echo $dh::getError();  // cURL error message, if any
