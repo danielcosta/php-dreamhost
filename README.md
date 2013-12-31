@@ -6,7 +6,37 @@ Interfaces with the Dreamhost API
 Installation
 ------------
 
-Package available on [Composer](http://packagist.org/packages/danielcosta/php-dreamhost). Autoloading is [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compatible.
+Autoloading is [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compatible.
+
+- [API on Packagist] (https://packagist.org/packages/danielcosta/php-dreamhost)
+- [API on GitHub] (https://github.com/danielcosta/php-dreamhost)
+
+To get the latest version of php-dreamhost just require it in your `composer.json` file like so.
+
+~~~
+"danielcosta/php-dreamhost": "dev-master"
+~~~
+
+You will then need to run `composer install` to download it and have the autoloader updated.
+
+Once php-dreamhost is installed you will need to register the service provider with the application.  Open up `app/config/app.php` and find the `providers` key.
+
+~~~
+'providers' => array(
+
+    # Existing providers...
+    'DanielCosta\Dreamhost\DreamhostServiceProvider',
+
+)
+~~~
+
+It also shiops with a facade which provides the static syntax for creating collections.  The facade is automatically registered for you as `Dreamhost`.
+
+Publish the config using artisan CLI.
+
+~~~
+php artisan config:publish danielcosta/dreamhost
+~~~
 
 Usage
 -----
