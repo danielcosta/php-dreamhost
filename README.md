@@ -84,10 +84,19 @@ Example
         echo $e->getMessage(); // contains either the error data returned by dreamhost or a curl error string and number
     }
 
-    echo $dh::getHttpCode();  // HTTP response code
+    // HTTP response code
+    echo $dh::getHttpCode();
 
-    echo $dh::getHttpInfo();  // HTTP header information
+    // HTTP header information
+    echo $dh::getHttpInfo();
 
-    echo $dh::getErroNumber();  // cURL error number, if any
+    // cURL error number, if any
+    echo $dh::getErrorNumber();
 
-    echo $dh::getError();  // cURL error message, if any
+    // cURL error message, if any
+    echo $dh::getError();
+
+## Changes
+
+#### v2.0.0
+- Rewrite to be more compatible with Laravel 4.1
