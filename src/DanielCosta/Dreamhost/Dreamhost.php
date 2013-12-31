@@ -21,8 +21,8 @@ class Dreamhost
     public function __construct($config)
     {
         $this->api_url = $config->get('dreamhost::api_url');
-        $this->format = $config->get('dreamhost::format');
-        $this->key = $config->get('dreamhost::key');
+        $this->format  = $config->get('dreamhost::format');
+        $this->key     = $config->get('dreamhost::key');
     }
 
     /**

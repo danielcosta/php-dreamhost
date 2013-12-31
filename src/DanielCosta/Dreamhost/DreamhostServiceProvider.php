@@ -34,27 +34,27 @@ class DreamhostServiceProvider extends ServiceProvider {
         $loader->alias('Dreamhost', 'DanielCosta\Dreamhost\Facades\Dreamhost');
     }
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
 	{
-		$this->app['dreamhost'] = $this->app->share(function($app)
+        $this->app['dreamhost'] = $this->app->share(function($app)
         {
             return new Dreamhost($app['config']);
         });
 	}
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array('dreamhost');
-	}
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('dreamhost');
+    }
 
 }
