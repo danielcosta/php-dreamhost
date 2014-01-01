@@ -13,6 +13,43 @@ use Illuminate\Config\Repository;
 class Dreamhost
 {
 
+    /**
+     * Repository config.
+     *
+     * @var \Illuminate\Config\Repository
+     */
+    protected $config;
+
+    /**
+     * @var string
+     */
+    private $http_code;
+
+    /**
+     * @var array
+     */
+    private $http_info = array();
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $error;
+
+    /**
+     * @var string
+     */
+    private $error_number;
+
+    /**
+     * @var string
+     */
+    public $app;
+
     /*
      * Create a new Dreamhost instance.
      *
@@ -20,9 +57,10 @@ class Dreamhost
      */
     public function __construct($config)
     {
-        $this->api_url = $config->get('dreamhost::api_url');
-        $this->format  = $config->get('dreamhost::format');
-        $this->key     = $config->get('dreamhost::key');
+
+        $this->api_url = $config->get('php-dreamhost::api_url');
+        $this->format  = $config->get('php-dreamhost::format');
+        $this->key     = $config->get('php-dreamhost::key');
     }
 
     /**

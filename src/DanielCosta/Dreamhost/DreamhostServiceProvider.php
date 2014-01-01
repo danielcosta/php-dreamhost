@@ -26,7 +26,7 @@ class DreamhostServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->package('danielcosta/dreamhost');
+        $this->package('danielcosta/php-dreamhost');
 
         // Auto create app alias with boot method
         // No need to alias in app/config/app.php
