@@ -3,16 +3,20 @@
     "description": "PHP class for the Dreamhost API",
     "type": "library",
     "license": "BSD-3-Clause",
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-0": {
-            "DanielCosta\\Dreamhost": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Daniel Costa",
             "email": "danielcosta@gmail.com"
         }
     ]
+    "autoload": {
+        "psr-0": {
+            "DanielCosta\\Dreamhost": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "minimum-stability": "dev"
 }
