@@ -251,7 +251,6 @@ class Dreamhost
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, TRUE);
         curl_setopt($ch, CURLOPT_SSLVERSION, 3);
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
