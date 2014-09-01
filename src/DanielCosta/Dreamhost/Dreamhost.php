@@ -8,8 +8,7 @@ use \Exception;
  * Class Dreamhost
  *
  * @package DanielCosta\Dreamhost
- * @author  Daniel Costa <danielcosta@gmail.com>
- * @version 1.0.1
+ * @author  Daniel Costa
  */
 class Dreamhost
 {
@@ -19,149 +18,274 @@ class Dreamhost
     private $key;
 
     /**
-     * @var string
+     * @var Enum\Format
      */
-    private $format = 'json';
+    private $format = Enum\Format::JSON;
+
+    /**
+     * @var Modules\AnnouncementList
+     */
+    private $moduleAnnouncementList;
+
+    /**
+     * @var Modules\Account
+     */
+    private $moduleAccount;
+
+    /**
+     * @var Modules\Api
+     */
+    private $moduleApi;
+
+    /**
+     * @var Modules\DNS
+     */
+    private $moduleDNS;
+
+    /**
+     * @var Modules\Domain
+     */
+    private $moduleDomain;
+
+    /**
+     * @var Modules\Jabber
+     */
+    private $moduleJabber;
+
+    /**
+     * @var Modules\Mail
+     */
+    private $moduleMail;
+
+    /**
+     * @var Modules\MySQL
+     */
+    private $moduleMySQL;
+
+    /**
+     * @var Modules\PrivateServer
+     */
+    private $modulePrivateServer;
+
+    /**
+     * @var Modules\Rewards
+     */
+    private $moduleRewards;
+
+    /**
+     * @var Modules\ServiceControl
+     */
+    private $moduleServiceControl;
+
+    /**
+     * @var Modules\User
+     */
+    private $moduleUser;
 
     public function __construct($key, $format = null)
     {
-        $this->key = $key;
+        $this->setKey($key);
 
-        if (!empty($format) && is_string($format)) {
-            $this->setFormat($format);
+        if (empty($format)) {
+            $format = Enum\Format::JSON;
         }
-    }
-
-    /**
-     * Call to execute commands
-     *
-     * @param string $cmd
-     * @param array  $args
-     *
-     * @return mixed
-     */
-    public function __call($cmd, array $args)
-    {
-        return $this->exec($cmd, $args);
-    }
-
-    /**
-     * Execute commands with arguments
-     *
-     * @param string $cmd
-     * @param array  $args
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function exec($cmd, array $args = array())
-    {
-        $args['cmd'] = $cmd;
-        $args['key'] = $this->key;
-        $args['format'] = 'json';
-
-        $ch = curl_init('https://api.dreamhost.com');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($ch);
-        $error = curl_error($ch);
-        $errorNumber = curl_errno($ch);
-        curl_close($ch);
-
-        if (!$result) {
-            throw new Exception($error, $errorNumber);
-        }
-
-        $data = json_decode($result, 1);
-
-        if (!$data) {
-            throw new Exception('JSON parse error on: ' . $result);
-        }
-
-        if ('error' === $data['result']) {
-            throw new Exception($data['data']);
-        } else {
-            return $data['data'];
-        }
+        $this->setFormat(new Enum\Format($format));
     }
 
     /**
      * Set return format
      *
-     * @param $format
+     * @param Enum\Format $format
      *
-     * @return $this
+     * @return Dreamhost
      * @throws \Exception
      */
-    public function setFormat($format)
+    public function setFormat(Enum\Format $format)
     {
-        if (!$this->isValidFormat($format)) {
-            throw new Exception('Invalid return format');
-        }
-
         $this->format = $format;
 
         return $this;
     }
 
     /**
-     * Get expected API return format
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
      * Set API auth key
      *
      * @param string $key
+     *
+     * @return Dreamhost
      */
     public function setKey($key)
     {
         $this->key = $key;
+
+        return $this;
     }
 
     /**
-     * Get API auth key
+     * Get Account module
      *
-     * @return string
+     * @return \DanielCosta\Dreamhost\Modules\Account
      */
-    public function getKey()
+    public function getAccount()
     {
-        return $this->key;
+        if (!($this->moduleAccount instanceof Modules\Account)) {
+            $this->moduleAccount = new Modules\Account();
+        }
+
+        return $this->moduleAccount;
     }
 
     /**
-     * Get available return format
+     * Get API module
      *
-     * @return array
+     * @return \DanielCosta\Dreamhost\Modules\Api
      */
-    private function getAvailableFormats()
+    public function getApi()
     {
-        return array(
-            'tab',
-            'xml',
-            'json',
-            'perl',
-            'php',
-            'vaml',
-            'html',
-        );
+        if (!($this->moduleApi instanceof Modules\Api)) {
+            $this->moduleApi = new Modules\Api();
+        }
+
+        return $this->moduleApi;
     }
 
     /**
-     * Returns if format is valid from available formats
+     * Get Announcement List module
      *
-     * @param string $format
-     *
-     * @return bool
+     * @return \DanielCosta\Dreamhost\Modules\AnnouncementList
      */
-    private function isValidFormat($format)
+    public function getAnnouncementList()
     {
-        return in_array($format, $this->getAvailableFormats());
+        if (!($this->moduleAnnouncementList instanceof Modules\AnnouncementList)) {
+            $this->moduleAnnouncementList = new Modules\AnnouncementList();
+        }
+
+        return $this->moduleAnnouncementList;
+    }
+
+    /**
+     * Get DNS module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\DNS
+     */
+    public function getDNS()
+    {
+        if (!($this->moduleDNS instanceof Modules\DNS)) {
+            $this->moduleDNS = new Modules\DNS();
+        }
+
+        return $this->moduleDNS;
+    }
+
+    /**
+     * Get Domain module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\Domain
+     */
+    public function getDomain()
+    {
+        if (!($this->moduleDomain instanceof Modules\Domain)) {
+            $this->moduleDomain = new Modules\Domain();
+        }
+
+        return $this->moduleDomain;
+    }
+
+    /**
+     * Get Jabber module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\Jabber
+     */
+    public function getJabber()
+    {
+        if (!($this->moduleJabber instanceof Modules\Jabber)) {
+            $this->moduleJabber = new Modules\Jabber();
+        }
+
+        return $this->moduleJabber;
+    }
+
+    /**
+     * Get Mail module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\Mail
+     */
+    public function getMail()
+    {
+        if (!($this->moduleMail instanceof Modules\Mail)) {
+            $this->moduleMail = new Modules\Mail();
+        }
+
+        return $this->moduleMail;
+    }
+
+    /**
+     * Get MySQL module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\MySQL
+     */
+    public function getMySQL()
+    {
+        if (!($this->moduleMySQL instanceof Modules\MySQL)) {
+            $this->moduleMySQL = new Modules\MySQL();
+        }
+
+        return $this->moduleMySQL;
+    }
+
+    /**
+     * Get Private Server module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\PrivateServer
+     */
+    public function getPrivateServer()
+    {
+        if (!($this->modulePrivateServer instanceof Modules\PrivateServer)) {
+            $this->modulePrivateServer = new Modules\PrivateServer();
+        }
+
+        return $this->modulePrivateServer;
+    }
+
+    /**
+     * Get Rewards module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\Rewards
+     */
+    public function getRewards()
+    {
+        if (!($this->moduleRewards instanceof Modules\Rewards)) {
+            $this->moduleRewards = new Modules\Rewards();
+        }
+
+        return $this->moduleRewards;
+    }
+
+    /**
+     * Get Service Control module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\ServiceControl
+     */
+    public function getServiceControl()
+    {
+        if (!($this->moduleServiceControl instanceof Modules\ServiceControl)) {
+            $this->moduleServiceControl = new Modules\ServiceControl();
+        }
+
+        return $this->moduleServiceControl;
+    }
+
+    /**
+     * Get User module
+     *
+     * @return \DanielCosta\Dreamhost\Modules\User
+     */
+    public function getUser()
+    {
+        if (!($this->moduleUser instanceof Modules\User)) {
+            $this->moduleUser = new Modules\User;
+        }
+
+        return $this->moduleUser;
     }
 }

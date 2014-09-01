@@ -2,7 +2,7 @@
     "name": "danielcosta/php-dreamhost",
     "description": "PHP class for the Dreamhost API",
     "type": "library",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
@@ -14,5 +14,12 @@
             "name": "Daniel Costa",
             "email": "danielcosta@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "myclabs/php-enum": "dev-master",
+        "guzzlehttp/guzzle": "~4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.*"
+    }
 }
